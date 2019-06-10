@@ -57,7 +57,7 @@ var App = React.createClass({
             success: function(response) {
                 self.setState({vehicles: response.content});
 			}
-       });
+		});
 	},
 	getInitialState: function () {
 		return {vehicles: []};
@@ -66,7 +66,9 @@ var App = React.createClass({
 		this.loadVehiclesFromServer();
 	},
 	render() {
-		return ( <VehicleTable vehicles={this.state.vehicles}/> );
+		return (
+			<VehicleTable vehicles={this.state.vehicles}/>
+		);
 	}
 });
 

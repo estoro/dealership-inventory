@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
 
 @RestController
 @RequestMapping("/api/vehicles")
@@ -76,5 +78,13 @@ public class VehicleController {
         }
 
         return vehicleRepository.findAll(booleanBuilder.getValue(), PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "_id")));
+    }
+
+    // Basic does equal comparisons for each request param
+    @GetMapping("/basic")
+    public Page<Vehicle> getVehiclesSimplified(@QuerydslPredicate(root = Vehicle.class) Predicate predicate, @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "500") int size) {
+
+        return vehicleRepository.findAll(predicate, PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "_id")));
     }
 }

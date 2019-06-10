@@ -12,6 +12,8 @@ public class VehicleLoader implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
+        // TODO - Sample data set did not have transmission type or mileage
+        // TODO - Load sample set from JSON
         saveVehicle("59d2698c2eaefb1268b69ee5", "Chevy", 2016, "Gray", 16106, false, true, true, false, true, false);
         saveVehicle("59d2698c05889e0b23959106", "Toyota", 2012, "Silver", 18696, true, true, false, true, false, true);
         saveVehicle("59d2698c6f1dc2cbec89c413", "Mercedes", 2016, "Black", 18390, true, false, false, true, true, false);
@@ -25,18 +27,18 @@ public class VehicleLoader implements CommandLineRunner {
 
     private void saveVehicle(String _id, String make, Integer year, String color, Integer price, Boolean hasSunroof, Boolean isFourWheelDrive, Boolean hasLowMiles,
             Boolean hasPowerWindows, Boolean hasNavigation, Boolean hasHeatedSeats) {
-        Vehicle v = new Vehicle();
-        v.set_id(_id);
-        v.setMake(make);
-        v.setYear(year);
-        v.setColor(color);
-        v.setPrice(price);
-        v.setHasSunroof(hasSunroof);
-        v.setIsFourWheelDrive(isFourWheelDrive);
-        v.setHasLowMiles(hasLowMiles);
-        v.setHasPowerWindows(hasPowerWindows);
-        v.setHasNavigation(hasNavigation);
-        v.setHasHeatedSeats(hasHeatedSeats);
-        repository.save(v);
+        Vehicle vehicle = new Vehicle();
+        vehicle.set_id(_id);
+        vehicle.setMake(make);
+        vehicle.setYear(year);
+        vehicle.setColor(color);
+        vehicle.setPrice(price);
+        vehicle.setHasSunroof(hasSunroof);
+        vehicle.setIsFourWheelDrive(isFourWheelDrive);
+        vehicle.setHasLowMiles(hasLowMiles);
+        vehicle.setHasPowerWindows(hasPowerWindows);
+        vehicle.setHasNavigation(hasNavigation);
+        vehicle.setHasHeatedSeats(hasHeatedSeats);
+        repository.save(vehicle);
     }
 }
