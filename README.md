@@ -7,10 +7,15 @@ Steps to run this project:
 5. Visit the following endpoint within your browser: `http://localhost:8080/`
 
 ```
+"I want my car to have a sun roof, 4 wheel drive, and power windows."
+http://localhost:8080/api/vehicles?hasSunroof=true&isFourWheelDrive=true&hasPowerWindows=true
+"I want a car with navigation, sun roof, or low miles."
+http://localhost:8080/api/vehicles?hasNavigation=true&hasSunroof=true&hasLowMiles=true
+
+Other Examples:
 http://localhost:8080/api/vehicles?make=Toyota&page=0&size=3
 http://localhost:8080/api/vehicles?make=Toyota&page=1&size=3
 http://localhost:8080/api/vehicles?price=16000
-
 http://localhost:8080/api/vehicles/basic?hasNavigation=true
 http://localhost:8080/api/vehicles/basic?year=2014
 ```
