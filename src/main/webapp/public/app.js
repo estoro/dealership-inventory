@@ -73,6 +73,8 @@ class Search extends React.Component {
 			hasNavigation: true,
 			hasHeatedSeats: true
 		};
+		this.handleColorChange = this.handleColorChange.bind(this);
+		this.handleMakeChange = this.handleMakeChange.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -87,6 +89,12 @@ class Search extends React.Component {
 	}
 	componentDidMount() {
 		this.loadVehiclesFromServer();
+	}
+	handleColorChange(event) {
+		this.setState({color: event.target.value});
+	}
+	handleMakeChange(event) {
+		this.setState({make: event.target.value});
 	}
 	handleInputChange(event) {
 		const target = event.target;
@@ -133,7 +141,7 @@ class Search extends React.Component {
 					</div>
 					<div className="form-group">
 						<label>Make</label>
-						<select className="form-control" value={this.state.make} onChange={this.handleInputChange}>
+						<select className="form-control" value={this.state.make} onChange={this.handleMakeChange}>
 							<option value="Any">Any</option>
 							<option value="Chevy">Chevy</option>
 							<option value="Ford">Ford</option>
@@ -147,7 +155,7 @@ class Search extends React.Component {
 					</div>
 					<div className="form-group">
 						<label>Color</label>
-						<select className="form-control" value={this.state.color} onChange={this.handleInputChange}>
+						<select className="form-control" value={this.state.color} onChange={this.handleColorChange}>
 							<option value="Any">Any</option>
 							<option value="Black">Black</option>
 							<option value="Gray">Gray</option>
