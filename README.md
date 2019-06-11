@@ -9,8 +9,9 @@ Steps to run this project:
 ```
 "I want my car to have a sun roof, 4 wheel drive, and power windows."
 http://localhost:8080/api/vehicles?hasSunroof=true&isFourWheelDrive=true&hasPowerWindows=true
+
 "I want a car with navigation, sun roof, or low miles."
-http://localhost:8080/api/vehicles?hasNavigation=true&hasSunroof=true&hasLowMiles=true
+http://localhost:8080/api/vehicles?operatorAnd=false&hasNavigation=true&hasSunroof=true&hasLowMiles=true
 
 Other Examples:
 http://localhost:8080/api/vehicles?make=Toyota&page=0&size=3

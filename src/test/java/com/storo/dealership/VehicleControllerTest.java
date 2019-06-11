@@ -38,6 +38,6 @@ public class VehicleControllerTest {
     @Test
     public void testPreLoadedVehicles() throws Exception {
         MockMvc.perform(get("/api/vehicles").contentType("application/json")).andDo(print()).andExpect(status().isOk())
-                .andExpect(jsonPath("$.content", hasSize(greaterThanOrEqualTo(10))));
+                .andExpect(jsonPath("$.content", hasSize(greaterThanOrEqualTo(9))));
     }
 }

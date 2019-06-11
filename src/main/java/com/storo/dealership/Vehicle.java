@@ -112,4 +112,23 @@ public class Vehicle {
     private Boolean hasPowerWindows;
     private Boolean hasNavigation;
     private Boolean hasHeatedSeats;
+
+    public Vehicle() {
+
+    }
+
+    public Vehicle(String _id, String make, Integer year, String color, Integer price, Boolean hasSunroof, Boolean isFourWheelDrive, Boolean hasLowMiles,
+            Boolean hasPowerWindows, Boolean hasNavigation, Boolean hasHeatedSeats) {
+        this._id = _id;
+        this.make = make;
+        this.year = year;
+        this.color = color;
+        this.price = price;
+        this.hasSunroof = hasSunroof;
+        this.isFourWheelDrive = isFourWheelDrive;
+        this.hasLowMiles = hasLowMiles;
+        this.hasPowerWindows = hasPowerWindows;
+        this.hasNavigation = hasNavigation;
+        this.hasHeatedSeats = hasHeatedSeats;
+    }
 }
