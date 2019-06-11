@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
 
 @RestController
 @RequestMapping("/api/vehicles")
@@ -30,82 +32,47 @@ public class VehicleController {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
 
         if (_id != null && !_id.isEmpty()) {
-            if (operatorAnd)
-                booleanBuilder.and(QVehicle.vehicle._id.eq(_id));
-            else
-                booleanBuilder.or(QVehicle.vehicle._id.eq(_id));
+            addPredicate(booleanBuilder, operatorAnd, QVehicle.vehicle._id.eq(_id));
         }
-
         if (make != null && !make.isEmpty()) {
-            if (operatorAnd)
-                booleanBuilder.and(QVehicle.vehicle.make.eq(make));
-            else
-                booleanBuilder.or(QVehicle.vehicle.make.eq(make));
+            addPredicate(booleanBuilder, operatorAnd, QVehicle.vehicle.make.eq(make));
         }
-
         if (color != null && !color.isEmpty()) {
-            if (operatorAnd)
-                booleanBuilder.and(QVehicle.vehicle.color.eq(color));
-            else
-                booleanBuilder.or(QVehicle.vehicle.color.eq(color));
+            addPredicate(booleanBuilder, operatorAnd, QVehicle.vehicle.color.eq(color));
         }
-
         if (year != null && year != 0) {
-            if (operatorAnd)
-                booleanBuilder.and(QVehicle.vehicle.year.goe(year));
-            else
-                booleanBuilder.or(QVehicle.vehicle.year.goe(year));
+            addPredicate(booleanBuilder, operatorAnd, QVehicle.vehicle.year.goe(year));
         }
-
         if (price != null && price != 0) {
-            if (operatorAnd)
-                booleanBuilder.and(QVehicle.vehicle.price.loe(price));
-            else
-                booleanBuilder.or(QVehicle.vehicle.price.loe(price));
+            addPredicate(booleanBuilder, operatorAnd, QVehicle.vehicle.price.loe(price));
         }
-
         if (hasSunroof != null) {
-            if (operatorAnd)
-                booleanBuilder.and(QVehicle.vehicle.hasSunroof.eq(hasSunroof));
-            else
-                booleanBuilder.or(QVehicle.vehicle.hasSunroof.eq(hasSunroof));
+            addPredicate(booleanBuilder, operatorAnd, QVehicle.vehicle.hasSunroof.eq(hasSunroof));
         }
-
         if (isFourWheelDrive != null) {
-            if (operatorAnd)
-                booleanBuilder.and(QVehicle.vehicle.isFourWheelDrive.eq(isFourWheelDrive));
-            else
-                booleanBuilder.or(QVehicle.vehicle.isFourWheelDrive.eq(isFourWheelDrive));
+            addPredicate(booleanBuilder, operatorAnd, QVehicle.vehicle.isFourWheelDrive.eq(isFourWheelDrive));
         }
-
         if (hasLowMiles != null) {
-            if (operatorAnd)
-                booleanBuilder.and(QVehicle.vehicle.hasLowMiles.eq(hasLowMiles));
-            else
-                booleanBuilder.or(QVehicle.vehicle.hasLowMiles.eq(hasLowMiles));
+            addPredicate(booleanBuilder, operatorAnd, QVehicle.vehicle.hasLowMiles.eq(hasLowMiles));
         }
-
         if (hasPowerWindows != null) {
-            if (operatorAnd)
-                booleanBuilder.and(QVehicle.vehicle.hasPowerWindows.eq(hasPowerWindows));
-            else
-                booleanBuilder.or(QVehicle.vehicle.hasPowerWindows.eq(hasPowerWindows));
+            addPredicate(booleanBuilder, operatorAnd, QVehicle.vehicle.hasPowerWindows.eq(hasPowerWindows));
         }
-
         if (hasNavigation != null) {
-            if (operatorAnd)
-                booleanBuilder.and(QVehicle.vehicle.hasNavigation.eq(hasNavigation));
-            else
-                booleanBuilder.or(QVehicle.vehicle.hasNavigation.eq(hasNavigation));
+            addPredicate(booleanBuilder, operatorAnd, QVehicle.vehicle.hasNavigation.eq(hasNavigation));
         }
-
         if (hasHeatedSeats != null) {
-            if (operatorAnd)
-                booleanBuilder.and(QVehicle.vehicle.hasHeatedSeats.eq(hasHeatedSeats));
-            else
-                booleanBuilder.or(QVehicle.vehicle.hasHeatedSeats.eq(hasHeatedSeats));
+            addPredicate(booleanBuilder, operatorAnd, QVehicle.vehicle.hasHeatedSeats.eq(hasHeatedSeats));
         }
 
         return vehicleRepository.findAll(booleanBuilder.getValue(), PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "_id")));
+    }
+
+    private void addPredicate(BooleanBuilder booleanBuilder, Boolean operatorAnd, @Nullable Predicate right) {
+        if (operatorAnd) {
+            booleanBuilder.and(right);
+        } else {
+            booleanBuilder.or(right);
+        }
     }
 }
