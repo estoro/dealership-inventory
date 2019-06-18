@@ -20,11 +20,11 @@ public class Vehicle {
         this._id = _id;
     }
 
-    public String getMake() {
+    public Make getMake() {
         return make;
     }
 
-    public void setMake(String make) {
+    public void setMake(Make make) {
         this.make = make;
     }
 
@@ -36,11 +36,11 @@ public class Vehicle {
         this.year = year;
     }
 
-    public String getColor() {
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(Color color) {
         this.color = color;
     }
 
@@ -100,11 +100,19 @@ public class Vehicle {
         this.hasHeatedSeats = hasHeatedSeats;
     }
 
+    public enum Color {
+        Black, Gray, Red, Silver, White
+    }
+
+    public enum Make {
+        Chevy, Ford, Mercedes, Toyota
+    }
+
     @Id
     private String _id;
-    private String make;
+    private Make make;
     private Integer year;
-    private String color;
+    private Color color;
     private Integer price;
     private Boolean hasSunroof;
     private Boolean isFourWheelDrive;
@@ -117,7 +125,7 @@ public class Vehicle {
 
     }
 
-    public Vehicle(String _id, String make, Integer year, String color, Integer price, Boolean hasSunroof, Boolean isFourWheelDrive, Boolean hasLowMiles,
+    public Vehicle(String _id, Make make, Integer year, Color color, Integer price, Boolean hasSunroof, Boolean isFourWheelDrive, Boolean hasLowMiles,
             Boolean hasPowerWindows, Boolean hasNavigation, Boolean hasHeatedSeats) {
         this._id = _id;
         this.make = make;
